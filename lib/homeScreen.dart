@@ -8,159 +8,134 @@ class CEO_List extends StatefulWidget {
 }
 
 class _CEO_ListState extends State<CEO_List> {
+  List ceoName = [
+    "Sundar Pichai",
+    "Bill Gates",
+    "Jeff Bezos",
+    "Mukesh Ambani",
+    "Tim Cook",
+    "Shantanu Narayan",
+    "Daniel Zhang",
+    "Harald Kruger",
+    "Michael Dell",
+    "Bob Swan"
+  ];
+  List companyName = [
+    "GOOGLE",
+    "MICROSOFT",
+    "AMAZON",
+    "RELIANCE LTD.",
+    "APPLE",
+    "ADOBE",
+    "ALIBABA",
+    "BMW",
+    "Dell",
+    "INTEL"
+  ];
+  List ceoImg = [
+    "assets/images/sundar.jpg",
+    "assets/images/bill.jpg",
+    "assets/images/jef.jpg",
+    "assets/images/mukesh.jpg",
+    "assets/images/cook.jpg",
+    "assets/images/adobe.jpg",
+    "assets/images/alibaba.jpg",
+    "assets/images/bmw.jpg",
+    "assets/images/dell.jpg",
+    "assets/images/bob.jpg"
+  ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            evenBoxUI(),
-            oddBoxUI(),
-          ],
-        ),
-      ),
+          body: Stack(
+        children: [
+          Container(
+            height: double.infinity,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                transform: GradientRotation(1),
+                colors: [Colors.blue, Colors.blue.shade900, Colors.purple.shade800],
+              ),
+            ),
+          ),
+          ListView.builder(
+            itemBuilder: (context, index) => boxUI(
+                ceoName[index],
+                companyName[index],
+                ceoImg[index],
+                index % 2 == 0 ? Colors.white38 : Colors.black38,
+                index % 2 == 1 ? Colors.white70 : Colors.black),
+            itemCount: ceoName.length,
+          ),
+        ],
+      )),
     );
   }
 
-  Widget evenBoxUI() {
+  Widget boxUI(
+      String ceoName, String companyName, String imgPath, Color c1, Color c2) {
     return Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(10.0),
       child: Container(
-        height: 100,
+        height: 50,
         width: double.infinity,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          gradient: const LinearGradient(colors: [
-            Colors.greenAccent,
-            Colors.green,
-          ]),
+          borderRadius: BorderRadius.circular(10),
+          color: c1,
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 80,
-                width: 80,
-                decoration:  BoxDecoration(
-                  //shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white,width: 2),
-                  gradient: const LinearGradient(colors: [
-                    Colors.cyanAccent,
-                    Colors.cyan,
-                  ],),
-                ),
-                child: Image.asset("assets/images/sundar.jpg",fit: BoxFit.cover),
+              child: CircleAvatar(
+                radius: 20,
+                backgroundImage: AssetImage("$imgPath"),
               ),
             ),
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Spacer(),
                 Text(
-                  "Sundar Pichai",
+                  "${ceoName}",
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      letterSpacing: 2,
-                      fontWeight: FontWeight.bold),
+                    color: c2,
+                    fontSize: 10,
+                    letterSpacing: 1,
+                    wordSpacing: 2,
+                  ),
                 ),
                 SizedBox(
                   height: 3,
                 ),
                 Text(
-                  "CEO Google",
+                  "${companyName}",
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 13,
+                    color: c2,
+                    fontSize: 7,
                     letterSpacing: 1,
+                    wordSpacing: 2,
                   ),
                 ),
+                Spacer(),
               ],
             ),
+            Spacer(),
             Padding(
-              padding: const EdgeInsets.all(18.0),
+              padding: const EdgeInsets.only(right: 20),
               child: Container(
-                height: 30,
-                width: 30,
+                alignment: Alignment.center,
+                height: 15,
+                width: 15,
                 decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 2)),
-                child: const Icon(Icons.navigate_next,
-                    color: Colors.white, size: 25),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-  Widget oddBoxUI() {
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: Container(
-        height: 100,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          gradient: const LinearGradient(colors: [
-            Colors.tealAccent,
-            Colors.teal,
-          ]),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 80,
-                width: 80,
-                decoration:  BoxDecoration(
-                  //shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white,width: 2),
-                  gradient: const LinearGradient(colors: [
-                    Colors.cyanAccent,
-                    Colors.cyan,
-                  ],),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.white54, width: 1),
                 ),
-                child: Image.asset("assets/images/sundar.jpg",fit: BoxFit.cover),
-              ),
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text(
-                  "Sundar Pichai",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      letterSpacing: 2,
-                      fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 3,
-                ),
-                Text(
-                  "CEO Google",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 13,
-                    letterSpacing: 1,
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Container(
-                height: 30,
-                width: 30,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 2)),
-                child: const Icon(Icons.navigate_next,
-                    color: Colors.white, size: 25),
+                child:
+                    Icon(Icons.navigate_next, color: Colors.white60, size: 12),
               ),
             ),
           ],
